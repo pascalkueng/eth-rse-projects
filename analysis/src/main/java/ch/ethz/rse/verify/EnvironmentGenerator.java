@@ -1,6 +1,5 @@
 package ch.ethz.rse.verify;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,14 +7,7 @@ import com.google.common.collect.Iterables;
 
 import apron.Environment;
 import ch.ethz.rse.pointer.PointsToInitializer;
-import ch.ethz.rse.pointer.TrainStationInitializer;
-import soot.IntegerType;
-import soot.Local;
-import soot.SootMethod;
-import soot.Value;
-import soot.jimple.ParameterRef;
-import soot.jimple.internal.JimpleLocal;
-import soot.util.Chain;
+import soot.*;
 
 /**
  * Container for environment containing all relevant values
@@ -45,7 +37,9 @@ public class EnvironmentGenerator {
 
 		// populate this.ints
 
-		// FILL THIS OUT
+		method.retrieveActiveBody().getLocals().forEach(local -> {
+			this.ints.add(local.getName());
+		});
 
 		String ints_arr[] = Iterables.toArray(this.ints, String.class);
 		String reals[] = {}; // we are not analyzing real numbers
