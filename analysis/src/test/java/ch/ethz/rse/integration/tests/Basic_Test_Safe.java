@@ -10,10 +10,11 @@ import ch.ethz.rse.TrainStation;
 public class Basic_Test_Safe {
 	public static void m1(int j) {
 		TrainStation s = new TrainStation(10);
-		if (0 <= j && j < 10) {
-			// 0<=j<10
-			// s can only point to an object with 10 tracks
-			s.arrive(j);
-		}
+
+
+			if(0 <=j && j < 10) {
+				s.arrive(j);
+			}
+
 	}
 }

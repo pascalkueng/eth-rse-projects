@@ -7,7 +7,7 @@ import ch.ethz.rse.TrainStation;
 // TRACK_IN_RANGE SAFE
 // NO_CRASH SAFE
 
-public class A__Loop4Test {
+public class Loop4Test {
 
 	public static void m1() {
 		  TrainStation s = new TrainStation(10);

@@ -161,7 +161,6 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 					w3.set(w1.widen(w2).get());
 				} else {
 					w3.set(w1.join(w2).get());
-					loopHeadState.put(succNode, w3);
 				}
 			}
 		} catch (Exception e) {
@@ -350,6 +349,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		logger.info("trainstationvar: " + trainStationVar.toString());
 
 		pointsTo.getTrainStationsByPointer(trainStationVar).forEach(trainStationInitializer -> {
+
 			logger.info("current station: " + trainStationInitializer);
 			Interval intervalArg = null;
 			Interval intervalStation = null;
@@ -455,6 +455,8 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 	private void handleBinopExpr(NumericalStateWrapper outWrapper, Value left, BinopExpr right) {
 
 		Abstract1 out = outWrapper.get();
+		logger.info("handle binop outwrapper: " + outWrapper.toString());
+
 
 		Interval interval1 = getInterval(right.getOp1(), outWrapper.get());
 		Interval interval2 = getInterval(right.getOp2(), outWrapper.get());
@@ -466,7 +468,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 		if(right instanceof JAddExpr) {
 			assert interval1 != null;
 			if (interval1.isTop()) {
-				intervalresult.setTop();;
+				intervalresult.setTop();
 			} else {
 				assert interval2 != null;
 				if (interval2.isTop()) {
@@ -513,20 +515,25 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 			logger.info("result interval is: " + intervalresult);
 
-			StringVar targetVar = new StringVar(left.toString());
-			Abstract1 sourceAbs = null;
+			StringVar leftVar = new StringVar(left.toString());
+
 			try {
-				sourceAbs = new Abstract1(man, env,
-						new Var[]{targetVar}, new Interval[]{intervalresult});
-				out.forget(man, new StringVar(left.toString()), false);
-				out.meet(man, sourceAbs);
+				Linterm1 linterm1 = new Linterm1(leftVar, new MpqScalar(-1));
+				Linexpr1 linexpr1 = new Linexpr1(env, new Linterm1[] { linterm1 }, intervalresult);
+				Lincons1 lincons1 = new Lincons1(Lincons1.EQ, linexpr1);
+
+				logger.info("lincons " + lincons1);
+
+				out.forget(man, leftVar, false);
+				out.meet(man, lincons1);
+				//out.assign(man, targetVar, linexpr1, out);
+				//logger.info("lincons: " + lincons1.toString());
 			} catch (ApronException e) {
 				e.printStackTrace();
 			}
 
 			outWrapper.set(out);
 
-			logger.info("abstract1 out: " + out.toString());
 			logger.info("outwrapper: " + outWrapper.toString());
 
 		} else if (right instanceof JSubExpr) {
@@ -541,7 +548,7 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 			assert interval1 != null;
 			if (interval1.isTop()) {
-				intervalresult.setTop();;
+				intervalresult.setTop();
 			} else {
 				assert interval2 != null;
 				if (interval2.isTop()) {
@@ -588,13 +595,19 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 			logger.info("result interval is: " + intervalresult);
 
-			StringVar targetVar = new StringVar(left.toString());
-			Abstract1 sourceAbs = null;
+			StringVar leftVar = new StringVar(left.toString());
+
 			try {
-				sourceAbs = new Abstract1(man, env,
-						new Var[]{targetVar}, new Interval[]{intervalresult});
-				out.forget(man, new StringVar(left.toString()), false);
-				out.meet(man, sourceAbs);
+				Linterm1 linterm1 = new Linterm1(leftVar, new MpqScalar(-1));
+				Linexpr1 linexpr1 = new Linexpr1(env, new Linterm1[] { linterm1 }, intervalresult);
+				Lincons1 lincons1 = new Lincons1(Lincons1.EQ, linexpr1);
+
+				logger.info("lincons " + lincons1);
+
+				out.forget(man, leftVar, false);
+				out.meet(man, lincons1);
+				//out.assign(man, targetVar, linexpr1, out);
+				//logger.info("lincons: " + lincons1.toString());
 			} catch (ApronException e) {
 				e.printStackTrace();
 			}
@@ -629,13 +642,19 @@ public class NumericalAnalysis extends ForwardBranchedFlowAnalysis<NumericalStat
 
 			logger.info("result interval is: " + intervalresult);
 
-			StringVar targetVar = new StringVar(left.toString());
-			Abstract1 sourceAbs = null;
+			StringVar leftVar = new StringVar(left.toString());
+
 			try {
-				sourceAbs = new Abstract1(man, env,
-						new Var[]{targetVar}, new Interval[]{intervalresult});
-				out.forget(man, new StringVar(left.toString()), false);
-				out.meet(man, sourceAbs);
+				Linterm1 linterm1 = new Linterm1(leftVar, new MpqScalar(-1));
+				Linexpr1 linexpr1 = new Linexpr1(env, new Linterm1[] { linterm1 }, intervalresult);
+				Lincons1 lincons1 = new Lincons1(Lincons1.EQ, linexpr1);
+
+				logger.info("lincons " + lincons1);
+
+				out.forget(man, leftVar, false);
+				out.meet(man, lincons1);
+				//out.assign(man, targetVar, linexpr1, out);
+				//logger.info("lincons: " + lincons1.toString());
 			} catch (ApronException e) {
 				e.printStackTrace();
 			}

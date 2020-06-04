@@ -7,9 +7,12 @@ import ch.ethz.rse.TrainStation;
 // TRACK_IN_RANGE SAFE
 // NO_CRASH SAFE
 
-public class A__BinOpSafe {
+public class BinOpSafe {
 
 	public static void m1() {
+
+
+
 		int x = 10;
 		int y = 10;
 		TrainStation s = new TrainStation(20);

@@ -65,7 +65,6 @@ public class PointsToInitializer {
 				if (unit instanceof JInvokeStmt) {
 					JInvokeStmt stmt = (JInvokeStmt) unit;
 					if (stmt.getInvokeExpr().getMethod().getName().contains("<init>")) {
-						//logger.info("analyzing statement: " + stmt.toString());
 						InvokeExpr expr = stmt.getInvokeExpr();
 						Value arg = expr.getArg(0);
 						Value trainStationVar = (expr.getUseBoxes().get(1)).getValue();
