@@ -7,14 +7,13 @@ import ch.ethz.rse.TrainStation;
 // TRACK_IN_RANGE SAFE
 // NO_CRASH SAFE
 
-public class Basic_Test_Safe {
+public class BinOpVarSafe {
 	public static void m1(int j) {
 		TrainStation s = new TrainStation(10);
-
-
-			if(0 <=j && j < 10) {
-				s.arrive(j);
-			}
-
+		int x = j * 2; // 2j
+		int y = x + 12; // 2j+12
+		int res = y - 2*j-6;  //6
+		
+		s.arrive(res);
 	}
 }

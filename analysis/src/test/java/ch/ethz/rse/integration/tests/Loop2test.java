@@ -7,14 +7,20 @@ import ch.ethz.rse.TrainStation;
 // TRACK_IN_RANGE SAFE
 // NO_CRASH SAFE
 
-public class Basic_Test_Safe {
+public class Loop2test {
+
 	public static void m1(int j) {
-		TrainStation s = new TrainStation(10);
 
+	      TrainStation s = new TrainStation(600);
 
-			if(0 <=j && j < 10) {
-				s.arrive(j);
-			}
+	      for (int i = 0; i < 500; i++) {
+
+	               s.arrive(i);
+
+	      }
+
+	     s.arrive(518);
 
 	}
+
 }

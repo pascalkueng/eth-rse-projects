@@ -7,14 +7,19 @@ import ch.ethz.rse.TrainStation;
 // TRACK_IN_RANGE SAFE
 // NO_CRASH SAFE
 
-public class Basic_Test_Safe {
-	public static void m1(int j) {
-		TrainStation s = new TrainStation(10);
+public class NonLin {
 
+	public static void m1(int j){
 
-			if(0 <=j && j < 10) {
-				s.arrive(j);
-			}
+	    TrainStation s = new TrainStation(4);
+
+	    int i = j;
+
+	    if(i*i < 10){
+
+	        s.arrive(i);
+
+	    }
 
 	}
 }
