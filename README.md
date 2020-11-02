@@ -1,3 +1,5 @@
+This project was part of the course Rigorous Software Engineering at ETH Zürich.
+
 # RSE Project 2020
 
 In this file, we explain how to set up, run, and develop this project. The
